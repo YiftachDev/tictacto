@@ -8,8 +8,13 @@ const game = (function () {
       }
     }
     function updateBoard(index, mark) {
+      if (_gameBoard[index] != "") {
+        alert("Not avalible");
+        return;
+      }
       _gameBoard[index] = mark;
       render();
+      changeTurns();
     }
     return { render, updateBoard };
   })();
@@ -28,11 +33,15 @@ const game = (function () {
         if (player1.turn)
           gameBoard.updateBoard(field.getAttribute("data-index"), "x");
         else gameBoard.updateBoard(field.getAttribute("data-index"), "O");
-        player1.turn = !player1.turn;
-        player2.turn = !player2.turn;
       });
     }
   }
+
+  function changeTurns() {
+    player1.turn = !player1.turn;
+    player2.turn = !player2.turn;
+  }
+
   return { handleClick };
 })();
 
