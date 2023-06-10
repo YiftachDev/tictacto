@@ -8,3 +8,7 @@ const gameBoard = (function () {
   }
   return { render };
 })();
+
+function Player(name, sign) {
+  return { name, sign };
+}

@@ -6,8 +6,8 @@ body {
 .gameboard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 454px;
-  height: 454px;
+  width: 500px;
+  height: 500px;
 }
 
 .field {
