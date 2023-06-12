@@ -15,7 +15,7 @@ const game = (function () {
       render();
       changeTurns();
     }
-    return { updateBoard };
+    return { updateBoard, _gameBoard };
   })();
 
   function Player(name, mark, turn) {
@@ -25,6 +25,7 @@ const game = (function () {
   let player1 = Player("a", "x", true);
   let player2 = Player("b", "O", false);
 
+  let _countTurns = 0;
   function handleClick() {
     for (let i = 0; i < 9; i++) {
       let field = document.querySelector(`[data-index="${i}"]`);
@@ -32,6 +33,7 @@ const game = (function () {
         if (player1.turn)
           gameBoard.updateBoard(field.getAttribute("data-index"), "x");
         else gameBoard.updateBoard(field.getAttribute("data-index"), "O");
+        _countTurns++;
         checkWin();
       });
     }
@@ -47,31 +49,36 @@ const game = (function () {
     [0, 4, 8],
     [2, 4, 6],
   ];
+
   function checkWin() {
-    for (let winCondition = 0; winCondition < _winConditions.length; i++) {
+    console.log(_countTurns);
+    for (const winCondition of _winConditions) {
       if (
-        document.querySelector(
-          `[data-index="${winCondition}"]`[0].textContent ==
-            document.querySelector(`[data-index="${winCondition}"]`)[1]
-        ) &&
-        document.querySelector(`[data-index="${winCondition}"]`)[1] ==
-          document.querySelector(`[data-index="${winCondition}"]`)[2]
+        gameBoard._gameBoard[winCondition[0]] ==
+          gameBoard._gameBoard[winCondition[1]] &&
+        gameBoard._gameBoard[winCondition[1]] ==
+          gameBoard._gameBoard[winCondition[2]]
       ) {
-        if (
-          document.querySelector(`[data-index="${winCondition}"]`)
-            .textContent == "x"
-        ) {
+        if (gameBoard._gameBoard[winCondition[0]] == "x") {
           printWinner(player1.name);
           return;
-        } else {
+        } else if (gameBoard._gameBoard[winCondition[0]] == "O") {
           printWinner(player2.name);
           return;
         }
-      } else {
-        printTie();
-        return;
       }
     }
+    if (_countTurns >= 9) {
+      printTie();
+    }
+  }
+
+  function printWinner(name) {
+    alert(`${name} has won the game!`);
+  }
+
+  function printTie() {
+    alert("It's a tie!");
   }
 
   function changeTurns() {
