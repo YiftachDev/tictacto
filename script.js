@@ -39,6 +39,13 @@ const game = (function () {
     }
   }
 
+  let addPlayersBtn = document.querySelector("#addBtn");
+  let addPlayersForm = document.querySelector(".playersForm");
+  addPlayersBtn.addEventListener("click", () => {
+    addPlayersForm.style.display = "flex";
+    addPlayersForm.style.transform = "scale(1)";
+  });
+
   const _winConditions = [
     [0, 1, 2],
     [3, 4, 5],
