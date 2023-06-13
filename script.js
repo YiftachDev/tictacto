@@ -22,8 +22,8 @@ const game = (function () {
     return { name, mark, turn };
   }
 
-  let player1 = Player("a", "x", true);
-  let player2 = Player("b", "O", false);
+  let player1 = Player("", "x", true);
+  let player2 = Player("", "O", false);
 
   let _countTurns = 0;
   function handleClick() {
@@ -39,12 +39,23 @@ const game = (function () {
     }
   }
 
-  let addPlayersBtn = document.querySelector("#addBtn");
-  let addPlayersForm = document.querySelector(".playersForm");
-  addPlayersBtn.addEventListener("click", () => {
-    addPlayersForm.style.display = "flex";
-    addPlayersForm.style.transform = "scale(1)";
-  });
+  function handleButtons() {
+    let addPlayersBtn = document.querySelector("#addBtn");
+    let addPlayersForm = document.querySelector(".playersForm");
+    addPlayersBtn.addEventListener("click", () => {
+      addPlayersForm.style.display = "flex";
+      addPlayersForm.style.transform = "scale(1)";
+    });
+    let submitBtn = document.querySelector("#submitBtn");
+    let input1 = document.querySelector("#player1");
+    let input2 = document.querySelector("#player2");
+    submitBtn.addEventListener("click", () => {
+      addPlayersForm.style.display = "none";
+      addPlayersForm.style.transform = "scale(0)";
+      player1.name = input1.value;
+      player2.name = input2.value;
+    });
+  }
 
   const _winConditions = [
     [0, 1, 2],
@@ -94,4 +105,5 @@ const game = (function () {
   }
 
   handleClick();
+  handleButtons();
 })();
