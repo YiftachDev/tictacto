@@ -55,6 +55,15 @@ const game = (function () {
       player1.name = input1.value;
       player2.name = input2.value;
     });
+    let resetBtn = document.querySelector("#reset");
+    resetBtn.addEventListener("click", reset);
+  }
+
+  function reset() {
+    for (let i = 0; i < gameBoard._gameBoard.length; i++) {
+      let field = document.querySelector(`[data-index="${i}"]`);
+      field.innerHTML = "";
+    }
   }
 
   const _winConditions = [
