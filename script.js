@@ -86,7 +86,5 @@ const game = (function () {
     player2.turn = !player2.turn;
   }
 
-  return { handleClick };
+  handleClick();
 })();
-
-game.handleClick();

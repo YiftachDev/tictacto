@@ -1,6 +1,8 @@
-body {
+.wrap {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .gameboard {
@@ -11,8 +13,39 @@ body {
 }
 
 .field {
-  border: 1px solid black;
+  border: 2px solid purple;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 50px;
+  font-weight: bold;
+  padding: 0;
+}
+
+.title {
+  text-decoration: underline;
+  color: red;
+  text-shadow: 4px 1px 2px black;
+  font-size: 4em;
+  font-weight: 1000;
+  margin: 0;
+}
+
+#addBtn {
+  margin-bottom: 40px;
+  margin-top: 40px;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 20px;
+  background-color: rgb(255, 57, 255);
+  border-radius: 7px;
+  border: 2px black solid;
+  transition: opacity 0.4s;
+  transition: transform 0.3s;
+}
+
+#addBtn:hover {
+  opacity: 0.6;
+  cursor: pointer;
+  transform: scale(1.2);
 }
