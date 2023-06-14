@@ -22,8 +22,8 @@ const game = (function () {
     return { name, mark, turn };
   }
 
-  let player1 = Player("", "x", true);
-  let player2 = Player("", "O", false);
+  let player1 = Player("x", "x", true);
+  let player2 = Player("O", "O", false);
 
   let _countTurns = 0;
   function handleClick() {
@@ -60,10 +60,16 @@ const game = (function () {
   }
 
   function reset() {
+    _winDiv.textContent = "";
+    changeTurns();
     for (let i = 0; i < gameBoard._gameBoard.length; i++) {
       let field = document.querySelector(`[data-index="${i}"]`);
       field.innerHTML = "";
     }
+    for (let j = 0; j < gameBoard._gameBoard.length; j++) {
+      gameBoard._gameBoard[j] = "";
+    }
+    _countTurns = 0;
   }
 
   const _winConditions = [
@@ -100,12 +106,13 @@ const game = (function () {
     }
   }
 
+  let _winDiv = document.querySelector(".win");
   function printWinner(name) {
-    alert(`${name} has won the game!`);
+    _winDiv.textContent = `${name} has won the game!`;
   }
 
   function printTie() {
-    alert("It's a tie!");
+    _winDiv.textContent = "It's a tie!";
   }
 
   function changeTurns() {
